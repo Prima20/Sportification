@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1012464185127",
+    "firebase_url": "https://sportification-a96d8.firebaseio.com",
+    "project_id": "sportification-a96d8",
+    "storage_bucket": "sportification-a96d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012464185127:android:42684014cc14a9da",
+        "android_client_info": {
+          "package_name": "com.rpl.kelompok7.sportification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012464185127-4jsdd7pl8i2pi607d43oqvac3f5rv0n3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rpl.kelompok7.sportification",
+            "certificate_hash": "e4273fba022b3a2c860e86c57996bb2b86aa18f9"
+          }
+        },
+        {
+          "client_id": "1012464185127-9nu9rmcoc1k9kaku1sb1vjs1hvfcssuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt7LylbqoPZSM8D9iXVZSx8BkmRFeCGvw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012464185127-9nu9rmcoc1k9kaku1sb1vjs1hvfcssuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
