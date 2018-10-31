@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView linkSignUp = (TextView) findViewById(R.id.to_register_activity);
+        TextView linkSignUp = (TextView) findViewById(R.id.to_register_activity_button);
         linkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

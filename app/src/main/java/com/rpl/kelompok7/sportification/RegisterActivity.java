@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.rpl.kelompok7.sportification.Models.User;
 import com.rpl.kelompok7.sportification.Utils.FirebaseMethods;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -62,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                 email = mEmail.getText().toString();
                 username = mUserName.getText().toString();
                 password = mPassword.getText().toString();
+
 
                 if(isStringNull(email) || isStringNull(username) || isStringNull(password)){
                     Toast.makeText(mContext , "you must fill out all the field" , Toast.LENGTH_SHORT).show();

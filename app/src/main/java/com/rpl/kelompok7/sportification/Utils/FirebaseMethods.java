@@ -17,22 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.root.project.instagramclone.Home.HomeActivity;
-import com.root.project.instagramclone.Models.Photo;
-import com.root.project.instagramclone.Models.User;
-import com.root.project.instagramclone.Models.UserAccountSettings;
-import com.root.project.instagramclone.Models.UserSettings;
-import com.root.project.instagramclone.Profile.AccountSettingActivity;
-import com.root.project.instagramclone.R;
+import com.rpl.kelompok7.sportification.Models.*;
+import com.rpl.kelompok7.sportification.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Created by zakwan on 22/10/2017.
@@ -44,7 +31,6 @@ public class FirebaseMethods {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
-    private StorageReference mStorageReference;
 
 
     private static final String TAG = "HomeActivity";
@@ -57,7 +43,6 @@ public class FirebaseMethods {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        mStorageReference = FirebaseStorage.getInstance().getReference();
         mContext = context;
 
         if(mAuth.getCurrentUser() != null){
@@ -65,17 +50,6 @@ public class FirebaseMethods {
         }
     }
 
-    public int getImageCount(DataSnapshot dataSnapshot){
-        int count = 0;
-
-        for(DataSnapshot ds: dataSnapshot
-                .child(mContext.getString(R.string.dbname_user_photos))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .getChildren()){
-            count++;
-        }
-        return count;
-    }
 
     public void updateEmail(String email){
         myRef.child(mContext.getString(R.string.db_users))
@@ -117,114 +91,97 @@ public class FirebaseMethods {
                 .child(userID)
                 .setValue(user);
 
-        UserAccountSettings userAccountSettings = new UserAccountSettings(
-                description,
-                username,
-                1,
-                1,
-                1,
-                profile_photo,
-                username.replace(" ","."),
-                website
-        );
+        UserAccountSettings userAccountSettings = new UserAccountSettings(username);
 
         myRef.child(mContext.getString(R.string.db_user_account_settings))
                 .child(userID)
                 .setValue(userAccountSettings);
     }
 
-    public UserSettings getUserSetting(DataSnapshot dataSnapshot){
-        UserAccountSettings settings = new UserAccountSettings();
-        User user = new User();
+//    public UserSettings getUserSetting(DataSnapshot dataSnapshot){
+//        UserAccountSettings settings = new UserAccountSettings();
+//        User user = new User();
+//
+//        for(DataSnapshot ds : dataSnapshot.getChildren()){
+//            if(ds.getKey().equals(mContext.getString(R.string.db_user_account_settings))) {
+//                try {
+//                    settings.setDisplay_name(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getDisplay_name()
+//                    );
+//                    settings.setUsername(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getUsername()
+//                    );
+//                    settings.setWebsite(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getWebsite()
+//                    );
+//                    settings.setDescription(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getDescription()
+//                    );
+//                    settings.setProfile_photo(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getProfile_photo()
+//                    );
+//                    settings.setPosts(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getPosts()
+//                    );
+//                    settings.setFollowing(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getFollowing()
+//                    );
+//                    settings.setFollowers(
+//                            ds.child(userID)
+//                                    .getValue(UserAccountSettings.class)
+//                                    .getFollowers()
+//                    );
+//                    Log.d(TAG , "retrieved user accout setting" + settings.toString());
+//                }
+//                catch (NullPointerException e){
+//                    Log.e(TAG,"NullPointerException" + e.getMessage());
+//                }
+//            }
+//            if(ds.getKey().equals(mContext.getString(R.string.db_users))) {
+//                try {
+//                    user.setUsername(
+//                            ds.child(userID)
+//                                    .getValue(User.class)
+//                                    .getUsername()
+//                    );
+//                    user.setEmail(
+//                            ds.child(userID)
+//                                    .getValue(User.class)
+//                                    .getEmail()
+//                    );
+//                    user.setPhone_number(
+//                            ds.child(userID)
+//                                    .getValue(User.class)
+//                                    .getPhone_number()
+//                    );
+//                    user.setUser_id(
+//                            ds.child(userID)
+//                                    .getValue(User.class)
+//                                    .getUser_id()
+//                    );
+//                    Log.d(TAG , "retrieved user information" + user.toString());
+//                }
+//                catch (NullPointerException e){
+//                    Log.e(TAG,"NullPointerException" + e.getMessage());
+//                }
+//            }
+//        }
+//        return new UserSettings(user , settings);
+//    }
 
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            if(ds.getKey().equals(mContext.getString(R.string.db_user_account_settings))) {
-                try {
-                    settings.setDisplay_name(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getDisplay_name()
-                    );
-                    settings.setUsername(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getUsername()
-                    );
-                    settings.setWebsite(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getWebsite()
-                    );
-                    settings.setDescription(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getDescription()
-                    );
-                    settings.setProfile_photo(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getProfile_photo()
-                    );
-                    settings.setPosts(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getPosts()
-                    );
-                    settings.setFollowing(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowing()
-                    );
-                    settings.setFollowers(
-                            ds.child(userID)
-                                    .getValue(UserAccountSettings.class)
-                                    .getFollowers()
-                    );
-                    Log.d(TAG , "retrieved user accout setting" + settings.toString());
-                }
-                catch (NullPointerException e){
-                    Log.e(TAG,"NullPointerException" + e.getMessage());
-                }
-            }
-            if(ds.getKey().equals(mContext.getString(R.string.db_users))) {
-                try {
-                    user.setUsername(
-                            ds.child(userID)
-                                    .getValue(User.class)
-                                    .getUsername()
-                    );
-                    user.setEmail(
-                            ds.child(userID)
-                                    .getValue(User.class)
-                                    .getEmail()
-                    );
-                    user.setPhone_number(
-                            ds.child(userID)
-                                    .getValue(User.class)
-                                    .getPhone_number()
-                    );
-                    user.setUser_id(
-                            ds.child(userID)
-                                    .getValue(User.class)
-                                    .getUser_id()
-                    );
-                    Log.d(TAG , "retrieved user information" + user.toString());
-                }
-                catch (NullPointerException e){
-                    Log.e(TAG,"NullPointerException" + e.getMessage());
-                }
-            }
-        }
-        return new UserSettings(user , settings);
-    }
-
-    private void setProfilePhoto(String url){
-        Log.d(TAG, "setProfilePhoto: setting new profile image: " + url);
-
-        myRef.child(mContext.getString(R.string.db_user_account_settings))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(mContext.getString(R.string.profile_photo))
-                .setValue(url);
-    }
 
 }
