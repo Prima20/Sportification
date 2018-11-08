@@ -102,7 +102,7 @@ public class DashboardActivity extends AppCompatActivity {
         createAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateAgendaActivity.class);
+                Intent intent = new Intent(view.getContext(), CheckCodeActivity.class);
                 startActivity(intent);
             }
         });

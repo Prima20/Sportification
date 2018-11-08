@@ -43,7 +43,7 @@
                 android:inputType="textEmailAddress"
                 android:hint="CODE BOOKING"
                 android:gravity="center"
-                android:id="@+id/text_code"/>
+                android:id="@+id/edt_check_code"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:id="@+id/check_button"
+            android:id="@+id/btn_check_code"
             android:textSize="20sp"
             android:text="CHECK"
             android:background="@drawable/white_rounded_button"/>

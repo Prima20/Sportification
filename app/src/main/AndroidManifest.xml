@@ -20,11 +20,14 @@
         <activity android:name=".CheckAgendaActivity"
             android:parentActivityName=".DashboardActivity"
             />
+        <activity android:name=".CheckCodeActivity"
+            android:parentActivityName=".DashboardActivity"
+            />
         <activity android:name=".RegisterActivity"
             android:parentActivityName=".LoginActivity"
             />
         <activity android:name=".CreateAgendaActivity"
-            android:parentActivityName=".DashboardActivity"
+            android:parentActivityName=".CheckCodeActivity"
             />
     </application>
 
