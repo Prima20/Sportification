@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:src="@drawable/sportification"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:src="@drawable/lapangan"
+            android:layout_marginBottom="10sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_pemesan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama "
+            android:textSize="20sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_lapangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lapangan "
+            android:textSize="20sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Waktu : "
+            android:textSize="15sp"
+            />
+        <TextView
+            android:id="@+id/tv_waktu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00 - 00:00"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_slot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Slot : 0/10 "
+            android:textSize="20sp"
+            android:layout_marginBottom="10sp"
+            />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:id="@+id/btn_join_agenda"
+            android:text="JOIN"
+            android:background="@drawable/white_rounded_button"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

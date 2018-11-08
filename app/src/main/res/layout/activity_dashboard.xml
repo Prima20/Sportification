@@ -16,19 +16,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/dashboard_toolbar"/>
+            <!-- <include layout="@layout/dashboard_toolbar"/> -->
 
 
         </LinearLayout>
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_create_agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create"
+            android:background="@drawable/black_border"
+            android:textColor="#4e4e4e"
+            android:layout_gravity="end"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp">
+            android:layout_height="wrap_content">
 
-
-            <include layout="@layout/single_agenda"/>
-        </LinearLayout>
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
