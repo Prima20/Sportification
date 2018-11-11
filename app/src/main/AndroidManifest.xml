@@ -21,14 +21,15 @@
             android:name=".CheckAgendaActivity"
             android:parentActivityName=".DashboardActivity" />
         <activity
-            android:name=".CheckCodeActivity"
-            android:parentActivityName=".DashboardActivity" />
+            android:name=".CreateAgendaActivity"
+            android:parentActivityName=".CheckCodeActivity" />
         <activity
             android:name=".RegisterActivity"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".CreateAgendaActivity"
-            android:parentActivityName=".CheckCodeActivity" />
+            android:name=".CheckCodeActivity"
+            android:parentActivityName=".LoginActivity" />
+
     </application>
 
 </manifest>

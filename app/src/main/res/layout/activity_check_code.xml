@@ -7,6 +7,14 @@
     android:background="#fff"
     >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +29,9 @@
             android:layout_height="75dp"
             android:src="@drawable/sportification"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="25dp"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -40,7 +50,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="number"
                 android:hint="CODE BOOKING"
                 android:gravity="center"
                 android:id="@+id/edt_check_code"/>

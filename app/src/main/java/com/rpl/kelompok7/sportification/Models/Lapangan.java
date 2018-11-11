@@ -5,6 +5,10 @@ public class Lapangan {
     private String lapangan;
     private String lokasi;
 
+    //Empty constructor for data snapshot
+    public Lapangan() {
+    }
+
     public Lapangan(String lapangan, String lokasi) {
         this.lapangan = lapangan;
         this.lokasi = lokasi;
@@ -16,5 +20,10 @@ public class Lapangan {
 
     public String getLokasi() {
         return lokasi;
+    }
+
+    @Override
+    public String toString() {
+        return lapangan;
     }
 }

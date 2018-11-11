@@ -8,10 +8,16 @@
     android:gravity="bottom"
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/sportification"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My header title"
+        android:text="Sportification"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 

@@ -52,10 +52,8 @@ public class DashboardActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.item_logout:
-                Toast.makeText(getApplicationContext(),"Logout",Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"User logout",Toast.LENGTH_SHORT);
                 return true;
-
-
         }
         return super.onOptionsItemSelected(item);
 
@@ -116,7 +114,7 @@ public class DashboardActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     Log.d("Database","run");
                     Agenda value = dataSnapshot1.getValue(Agenda.class);
-                    agendaList.add(new Agenda(value.waktuMulai,value.waktuSelesai,value.usernamePembuat,value.keterangan,value.lapangan,
+                    agendaList.add(new Agenda(value.id,value.tanggalAgenda,value.waktuMulai,value.waktuSelesai,value.usernamePembuat,value.keterangan,value.lapangan,
                             value.jumlahSlot,value.codeBooking));
                 }
 
@@ -147,6 +145,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.item_logout:
+                Toast.makeText(getApplicationContext(),"User logout",Toast.LENGTH_SHORT).show();
                 logout();
                 break;
         }

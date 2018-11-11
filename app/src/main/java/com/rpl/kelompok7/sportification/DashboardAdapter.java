@@ -38,7 +38,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(DashBoardHolder holder, int position) {
         Agenda current = agenda.get(position);
 
-        holder.namaLapangan.setText(current.lapangan);
+        holder.namaLapangan.setText(current.lapangan.getLapangan());
         holder.waktuMulai.setText(current.waktuMulai);
         holder.waktuSelesai.setText(current.waktuSelesai);
         holder.slotPemain.setText("0/10");
@@ -73,14 +73,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), CheckAgendaActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("lapangan",namaLapangan.getText().toString());
+                    bundle.putString("slotPemain",slotPemain.getText().toString());
+                    bundle.putString("waktuMulai",waktuMulai.getText().toString());
+                    bundle.putString("waktuSelesai",waktuSelesai.getText().toString());
+                    intent.putExtras(bundle);
                     _context.startActivity(intent);
                 }
             });
         }
-//                    Bundle bundle = new Bundle();
-//                    Intent intent = new Intent(view.getContext(), CheckAgendaActivity.class);
-//                    bundle.putString("lapangan",namaLapangan.getText().toString());
-//                    bundle.putString();
-//                    _context.startActivity(intent);
+
     }
 }
