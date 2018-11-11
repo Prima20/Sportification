@@ -3,21 +3,24 @@ package com.rpl.kelompok7.sportification.Models;
 import java.util.Date;
 
 public class Agenda {
+    public String id;
+    public Date tanggalAgenda;
     public String waktuMulai;
     public String waktuSelesai;
     public String usernamePembuat;
-    public int id;
     public String[] usernamePemain;
     public String keterangan;
-    public String lapangan;
+    public Lapangan lapangan;
     public int jumlahSlot;
-    public int codeBooking;
+    public String codeBooking;
 
     //Empty constructor to data snapshot
     public Agenda() {
     }
 
-    public Agenda(String waktuMulai, String waktuSelesai, String usernamePembuat, String keterangan, String lapangan, int jumlahSlot, int codeBooking) {
+    public Agenda(String id, Date tanggalAgenda, String waktuMulai, String waktuSelesai, String usernamePembuat, String keterangan, Lapangan lapangan, int jumlahSlot, String codeBooking) {
+        this.id = id;
+        this.tanggalAgenda = tanggalAgenda;
         this.waktuMulai = waktuMulai;
         this.waktuSelesai = waktuSelesai;
         this.usernamePembuat = usernamePembuat;
@@ -25,6 +28,14 @@ public class Agenda {
         this.lapangan = lapangan;
         this.jumlahSlot = jumlahSlot;
         this.codeBooking = codeBooking;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTanggalAgenda(Date tanggalAgenda) {
+        this.tanggalAgenda = tanggalAgenda;
     }
 
     public void setWaktuMulai(String waktuMulai) {
@@ -39,11 +50,15 @@ public class Agenda {
         this.usernamePembuat = usernamePembuat;
     }
 
+    public void setUsernamePemain(String[] usernamePemain) {
+        this.usernamePemain = usernamePemain;
+    }
+
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
 
-    public void setLapangan(String lapangan) {
+    public void setLapangan(Lapangan lapangan) {
         this.lapangan = lapangan;
     }
 
@@ -51,7 +66,7 @@ public class Agenda {
         this.jumlahSlot = jumlahSlot;
     }
 
-    public void setCodeBooking(int codeBooking) {
+    public void setCodeBooking(String codeBooking) {
         this.codeBooking = codeBooking;
     }
 }

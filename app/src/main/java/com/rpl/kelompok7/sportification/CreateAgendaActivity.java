@@ -79,12 +79,12 @@ public class CreateAgendaActivity extends AppCompatActivity {
 
                 setData();
 
-                Agenda agenda = new Agenda(mulai,selesai,pembuat,keterangan,lapangan,slot,0);
+                //Agenda agenda = new Agenda(mulai,selesai,pembuat,keterangan,lapangan,slot,0);
 
-                mDatabase.child(agendaId).setValue(agenda);
+               // mDatabase.child(agendaId).setValue(agenda);
 
-                Intent intent = new Intent(view.getContext(), DashboardActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(view.getContext(), DashboardActivity.class);
+                //startActivity(intent);
 
             }
         });

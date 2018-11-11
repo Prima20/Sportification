@@ -38,7 +38,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(DashBoardHolder holder, int position) {
         Agenda current = agenda.get(position);
 
-        holder.namaLapangan.setText(current.lapangan);
+        //holder.namaLapangan.setText(current.lapangan);
         holder.waktuMulai.setText(current.waktuMulai);
         holder.waktuSelesai.setText(current.waktuSelesai);
         holder.slotPemain.setText("0/10");
@@ -77,10 +77,5 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 }
             });
         }
-//                    Bundle bundle = new Bundle();
-//                    Intent intent = new Intent(view.getContext(), CheckAgendaActivity.class);
-//                    bundle.putString("lapangan",namaLapangan.getText().toString());
-//                    bundle.putString();
-//                    _context.startActivity(intent);
     }
 }

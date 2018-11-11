@@ -84,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                                     }else{
                                         Log.w(TAG, "signInWithEmail:success", task.getException());
                                         Toast.makeText(mContext, "success" , Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(mContext , DashboardActivity.class);
-                                        startActivity(intent);
+                                       // Intent intent = new Intent(mContext , DashboardActivity.class);
+                                        //startActivity(intent);
                                     }
 
                                 }
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         if(mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(mContext , DashboardActivity.class);
+            Intent intent = new Intent(mContext , DashboardPenyediaActivity.class);
             startActivity(intent);
             finish();
         }
