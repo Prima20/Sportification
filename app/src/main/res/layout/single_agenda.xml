@@ -28,7 +28,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="75dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/ic_field"
                     android:layout_gravity="center"/>
             </LinearLayout>
 
@@ -71,12 +71,12 @@
 
 
                 <TextView
-                    android:id="@+id/tv_noLapangan"
+                    android:id="@+id/tv_tanggal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:gravity="center"
-                    android:text="Lapangan 5"
+                    android:text="Tanggal"
                     android:textSize="15dp" />
 
 

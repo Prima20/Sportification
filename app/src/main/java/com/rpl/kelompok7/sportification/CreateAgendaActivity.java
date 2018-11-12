@@ -112,9 +112,9 @@ public class CreateAgendaActivity extends AppCompatActivity {
                     lapanganList.add(new Lapangan(value.getLapangan(), value.getLokasi()));
                 }
                 ArrayAdapter<Lapangan> adapter  = new
-                        ArrayAdapter<Lapangan>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, lapanganList);
+                        ArrayAdapter<Lapangan>(getApplicationContext(), R.layout.spinner_item, lapanganList);
 
-                adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+                adapter.setDropDownViewResource( R.layout.spinner_item);
                 spinnerLapangan.setAdapter(adapter);
             }
 

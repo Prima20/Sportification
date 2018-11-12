@@ -14,18 +14,22 @@ import android.widget.TextView;
 import com.rpl.kelompok7.sportification.Models.Agenda;
 import com.rpl.kelompok7.sportification.Models.Lapangan;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashBoardHolder> {
 
     LayoutInflater mInflater;
     ArrayList<Agenda> agenda;
     Context _context;
+    SimpleDateFormat dateFormatter;
 
     public DashboardAdapter(ArrayList<Agenda> agenda, Context _context) {
         this.mInflater = LayoutInflater.from(_context);
         this.agenda = agenda;
         this._context = _context;
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
     }
 
     @Override
@@ -41,6 +45,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.namaLapangan.setText(current.lapangan.getLapangan());
         holder.waktuMulai.setText(current.waktuMulai);
         holder.waktuSelesai.setText(current.waktuSelesai);
+        holder.tanggal.setText(dateFormatter.format(current.tanggalAgenda));
         holder.slotPemain.setText("0/10");
     }
 
@@ -57,6 +62,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView waktuMulai;
         TextView waktuSelesai;
         TextView slotPemain;
+        TextView tanggal;
         Button checkAgenda;
 
         public DashBoardHolder(View itemView, DashboardAdapter adapter) {
@@ -67,6 +73,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             waktuMulai = itemView.findViewById(R.id.tv_waktu_mulai);
             waktuSelesai = itemView.findViewById(R.id.tv_waktu_selesai);
             checkAgenda = itemView.findViewById(R.id.btn_check_agenda);
+            tanggal = itemView.findViewById(R.id.tv_tanggal);
             this.mAdapter = adapter;
 
             checkAgenda.setOnClickListener(new View.OnClickListener() {
