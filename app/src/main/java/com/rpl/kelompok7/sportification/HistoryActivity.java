@@ -33,14 +33,15 @@ public class HistoryActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view_history);
 
-        for(Agenda s : agendaList) {
-            historyList.add(s);
-            mAdapter.notifyDataSetChanged();
-        }
 
 
         mAdapter = new HistoryAdapter(historyList,HistoryActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
         recyclerView.setAdapter(mAdapter);
+
+        for(Agenda s : agendaList) {
+            historyList.add(s);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }

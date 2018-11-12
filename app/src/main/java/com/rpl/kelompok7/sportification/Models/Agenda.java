@@ -30,8 +30,7 @@ public class Agenda {
         this.tanggalAgenda = tanggalAgenda;
     }
 
-    public Agenda(String usernamePembuat, Date tanggalAgenda) {
-        this.usernamePembuat = usernamePembuat;
+    public Agenda(Date tanggalAgenda) {
         this.tanggalAgenda = tanggalAgenda;
     }
 

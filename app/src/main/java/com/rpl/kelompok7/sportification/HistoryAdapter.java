@@ -37,7 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryH
     public void onBindViewHolder(HistoryHolder holder, int position) {
         Agenda current = history.get(position);
 
-        holder.namaLapangan.setText(current.lapangan.getLapangan());
+        holder.namaLapangan.setText("Agenda " + position+1);
         holder.tanggalAgenda.setText(dateFormatter.format(current.tanggalAgenda));
     }
 

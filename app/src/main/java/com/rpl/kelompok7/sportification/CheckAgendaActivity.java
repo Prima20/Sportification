@@ -74,8 +74,7 @@ public class CheckAgendaActivity extends AppCompatActivity {
                 if(DashboardActivity.canJoin){
                     Toast.makeText(getApplicationContext(),"Player joined",Toast.LENGTH_SHORT).show();
                     DashboardActivity.canJoin = false;
-                    HistoryActivity.agendaList.add(new Agenda(getIntent().getExtras().getString("pembuat"),
-                            tanggalAgenda));
+                    HistoryActivity.agendaList.add(0,new Agenda(tanggalAgenda));
                     Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(intent);
                 }else{

@@ -29,7 +29,6 @@
         <activity
             android:name=".CheckCodeActivity"
             android:parentActivityName=".LoginActivity" />
-<<<<<<< HEAD
         <activity android:name=".HistoryActivity"
             android:parentActivityName=".DashboardActivity"
             />
