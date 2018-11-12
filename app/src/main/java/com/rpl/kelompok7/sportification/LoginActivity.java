@@ -18,18 +18,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.rpl.kelompok7.sportification.Models.User;
+import com.rpl.kelompok7.sportification.Utils.FirebaseMethods;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
 
     private static final String TAG = "LoginActivity";
     private Context mContext;
     private ProgressBar mProgressBar;
     private EditText mEmail , mPassword;
     private Button buttonLogin;
+    private FirebaseMethods firebaseMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
         mEmail = (EditText) findViewById(R.id.input_email);
         mPassword = (EditText) findViewById(R.id.input_password);
         mContext = LoginActivity.this;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        firebaseMethods = new FirebaseMethods(mContext);
 
         setupFirebaseAuth();
         init();
@@ -84,8 +98,31 @@ public class LoginActivity extends AppCompatActivity {
                                     }else{
                                         Log.w(TAG, "signInWithEmail:success", task.getException());
                                         Toast.makeText(mContext, "success" , Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(mContext , DashboardActivity.class);
-                                        startActivity(intent);
+                                        myRef.child(mContext.getString(R.string.db_users)).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                                                    User tmp =  dataSnapshot1.getValue(User.class);
+                                                    if(tmp.user_id != null)
+                                                    if(tmp.user_id.equals(mAuth.getUid()) && tmp.role != null){
+                                                        Log.d("=======================","found match" + tmp.role);
+                                                        if(tmp.role.equals("Pemain Futsal")){
+                                                            toDashboard();
+                                                        } else if (tmp.role.equals("Pemilik Lapangan")){
+                                                            Intent intent = new Intent(mContext , RegisterActivity.class);
+                                                            startActivity(intent);
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Log.w("Test", "Failed to read value.", databaseError.toException());
+                                            }
+                                        }
+                                        );
+
                                     }
 
                                 }
@@ -108,6 +145,11 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    void toDashboard(){
+        Intent intent = new Intent(mContext , DashboardActivity.class);
+        startActivity(intent);
     }
 
     /*
