@@ -46,7 +46,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.waktuMulai.setText(current.waktuMulai);
         holder.waktuSelesai.setText(current.waktuSelesai);
         holder.tanggal.setText(dateFormatter.format(current.tanggalAgenda));
-        holder.slotPemain.setText("0/10");
+        holder.slotPemain.setText("10");
 
         holder.namaPembuat = current.usernamePembuat;
         holder.keterangan = current.keterangan;
