@@ -52,7 +52,7 @@ public class CheckAgendaActivity extends AppCompatActivity {
         lapangan.setText(getIntent().getExtras().getString("lapangan"));
         waktu.setText(getIntent().getExtras().getString("waktuMulai") + ":" +
                 getIntent().getExtras().getString("waktuSelesai"));
-        slot.setText(getIntent().getExtras().getString("slotPemain"));
+        slot.setText("Slot: " + getIntent().getExtras().getString("slotPemain"));
         keterangan.setText(getIntent().getExtras().getString("keterangan"));
         lokasiLapangan.setText(getIntent().getExtras().getString("lokasi"));
 
