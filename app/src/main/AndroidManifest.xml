@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashboardActivity" />
+
         <activity
             android:name=".CheckAgendaActivity"
             android:parentActivityName=".DashboardActivity" />
@@ -29,6 +29,7 @@
         <activity
             android:name=".CheckCodeActivity"
             android:parentActivityName=".LoginActivity" />
+        <activity android:name=".DashboardActivity" />
 
     </application>
 

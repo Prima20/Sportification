@@ -11,6 +11,8 @@
     <string name="db_field_description">description</string>
     <string name="db_field_phone_number">phone_number</string>
     <string name="db_field_email">email</string>
+    <string name="pemain_futsal">Pemain Futsal</string>
+    <string name="pemilik_lapangan">Pemilik Lapangan</string>
     <string name="title_activity_dashboard_navigation">DashboardNavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -18,5 +20,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="role">
+        <item>Pemain Futsal</item>
+        <item>Pemilik Lapangan</item>
+    </string-array>
 
 </resources>
