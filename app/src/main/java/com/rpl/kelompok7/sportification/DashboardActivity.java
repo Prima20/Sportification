@@ -44,6 +44,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
+    public static boolean canJoin = true;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -144,6 +146,10 @@ public class DashboardActivity extends AppCompatActivity {
     void displayView(int id){
 
         switch (id){
+            case R.id.item_history:
+                Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
+                startActivity(intent);
+                break;
             case R.id.item_logout:
                 Toast.makeText(getApplicationContext(),"User logout",Toast.LENGTH_SHORT).show();
                 logout();
@@ -155,6 +161,11 @@ public class DashboardActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    void seeHistory(){
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
     }
 }

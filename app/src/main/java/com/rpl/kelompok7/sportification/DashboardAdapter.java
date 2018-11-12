@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.rpl.kelompok7.sportification.Models.Agenda;
-import com.rpl.kelompok7.sportification.Models.Lapangan;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashBoardHolder> {
@@ -47,6 +46,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.waktuSelesai.setText(current.waktuSelesai);
         holder.tanggal.setText(dateFormatter.format(current.tanggalAgenda));
         holder.slotPemain.setText("0/10");
+
+        holder.namaPembuat = current.usernamePembuat;
+        holder.keterangan = current.keterangan;
+        holder.lokasiLapangan = current.lapangan.getLokasi();
     }
 
     @Override
@@ -64,6 +67,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView slotPemain;
         TextView tanggal;
         Button checkAgenda;
+        String namaPembuat, keterangan, lokasiLapangan;
 
         public DashBoardHolder(View itemView, DashboardAdapter adapter) {
             super(itemView);
@@ -85,6 +89,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     bundle.putString("slotPemain",slotPemain.getText().toString());
                     bundle.putString("waktuMulai",waktuMulai.getText().toString());
                     bundle.putString("waktuSelesai",waktuSelesai.getText().toString());
+                    bundle.putString("pembuat",namaPembuat);
+                    bundle.putString("keterangan",keterangan);
+                    bundle.putString("lokasi",lokasiLapangan);
+                    bundle.putString("tanggal",tanggal.getText().toString());
                     intent.putExtras(bundle);
                     _context.startActivity(intent);
                 }

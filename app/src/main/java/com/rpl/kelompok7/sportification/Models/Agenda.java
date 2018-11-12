@@ -30,6 +30,11 @@ public class Agenda {
         this.tanggalAgenda = tanggalAgenda;
     }
 
+    public Agenda(String usernamePembuat, Date tanggalAgenda) {
+        this.usernamePembuat = usernamePembuat;
+        this.tanggalAgenda = tanggalAgenda;
+    }
+
     public void setWaktuMulai(String waktuMulai) {
         this.waktuMulai = waktuMulai;
     }
