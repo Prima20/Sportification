@@ -150,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
     void toDashboard(){
         Intent intent = new Intent(mContext , DashboardActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /*

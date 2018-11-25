@@ -71,7 +71,7 @@ public class FirebaseMethods {
 //    }
 
 
-    public void registerNewEmail(final String email , final String username , final String password){
+    public void registerNewEmail(final String email , final String username , final String password ,final String role){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -83,6 +83,7 @@ public class FirebaseMethods {
                         } else if(task.isSuccessful()){
                             userID = mAuth.getCurrentUser().getUid();
                             Toast.makeText(mContext, "register success", Toast.LENGTH_SHORT).show();
+                            addNewUser(email, username,role);
                         }
                     }
                 });

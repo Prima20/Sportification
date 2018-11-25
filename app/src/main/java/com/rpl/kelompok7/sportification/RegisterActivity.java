@@ -67,11 +67,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         mSpinner.setAdapter(adapter);
         mSpinner.setOnItemSelectedListener(this);
 
-        setupFirebaseAuth();
-        init();
+//        setupFirebaseAuth();
+        register();
     }
 
-    private void init(){
+    private void register(){
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +87,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 }
                 else{
                     mProgressBar.setVisibility(View.VISIBLE);
-                    firebaseMethods.registerNewEmail(email , username , password );
+                    firebaseMethods.registerNewEmail(email , username , password , role);
+
                 }
             }
         });
@@ -104,19 +105,19 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     /*
     * ==========================================firebase===============================================
     */
-    private void checkIfUsernameExists(final String username) {
-        Log.d(TAG, "checkIfUsernameExists: Checking if  " + username + " already exists.");
-
-
-
-        String mUsername = "";
-        mUsername = username ;
-
-
-        //add new user to the database
-        firebaseMethods.addNewUser(email, mUsername,role);
-
-        mAuth.signOut();
+//    private void checkIfUsernameExists(final String username) {
+//        Log.d(TAG, "checkIfUsernameExists: Checking if  " + username + " already exists.");
+//
+//
+//
+//        String mUsername = "";
+//        mUsername = username ;
+//
+//
+//        //add new user to the database
+//        firebaseMethods.addNewUser(email, mUsername,role);
+//
+//        mAuth.signOut();
 //
 //        Query query = reference
 //                .child(getString(R.string.db_users))
@@ -149,41 +150,41 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 //
 //            }
 //        });
-    }
+//    }
 
-    private void setupFirebaseAuth(){
-        mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference();
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            checkIfUsernameExists(username);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                    finish();
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-                // ...
-            }
-        };
-    }
+//    private void setupFirebaseAuth(){
+//        mAuth = FirebaseAuth.getInstance();
+//        firebaseDatabase = FirebaseDatabase.getInstance();
+//        myRef = firebaseDatabase.getReference();
+//
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull final FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    // User is signed in
+//                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+//
+//                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            checkIfUsernameExists(username);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//                    finish();
+//                } else {
+//                    // User is signed out
+//                    Log.d(TAG, "onAuthStateChanged:signed_out");
+//                }
+//                // ...
+//            }
+//        };
+//    }
 
     @Override
     public void onStart() {
