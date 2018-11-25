@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mEmail , mPassword;
     private Button buttonLogin;
-    private FirebaseMethods firebaseMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +53,9 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        firebaseMethods = new FirebaseMethods(mContext);
 
         setupFirebaseAuth();
-        init();
+        login();
     }
 
     private boolean isStringNull(String string){
@@ -71,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     /*
     * ==========================================firebase===============================================
     */
-    private void init(){
+    private void login(){
         buttonLogin = (Button) findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
