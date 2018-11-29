@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         firebaseMethods = new FirebaseMethods(mContext);
 
         setupFirebaseAuth();
-        init();
+        register();
     }
 
     private boolean isStringNull(String string){
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     /*
     * ==========================================firebase===============================================
     */
-    private void init(){
+    private void register(){
         buttonLogin = (Button) findViewById(R.id.button_login);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                                                         if(tmp.role.equals("Pemain Futsal")){
                                                             toDashboard();
                                                         } else if (tmp.role.equals("Pemilik Lapangan")){
-                                                            Intent intent = new Intent(mContext , RegisterActivity.class);
+//                                                            Intent intent = new Intent(mContext , RegisterActivity.class);
+                                                            Intent intent = new Intent(mContext , DataLapangan.class);
                                                             startActivity(intent);
                                                         }
                                                     }

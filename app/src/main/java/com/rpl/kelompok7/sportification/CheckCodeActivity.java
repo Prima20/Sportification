@@ -49,14 +49,18 @@ public class CheckCodeActivity extends AppCompatActivity {
         checkCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+//                if (checkInput()) {
+//                    Toast.makeText(view.getContext(), "Input salah", Toast.LENGTH_SHORT).show();
+//                } else {
+
                 mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(code.getText().toString())){
+                        if (dataSnapshot.hasChild(code.getText().toString())) {
                             Intent intent = new Intent(view.getContext(), CreateAgendaActivity.class);
-                            intent.putExtra("codeBooking",code.getText().toString());
+                            intent.putExtra("codeBooking", code.getText().toString());
                             startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(CheckCodeActivity.this, "Code Booking salah", Toast.LENGTH_SHORT);
                         }
                     }
@@ -65,10 +69,19 @@ public class CheckCodeActivity extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                    });
+                //}
             }
         });
 
+    }
+
+    boolean checkInput(){
+        if(code.getText().toString().equals(null)){
+           return false;
+        }else {
+            return true;
+        }
     }
 
     void firebaseSetup(){

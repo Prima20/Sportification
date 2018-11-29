@@ -48,6 +48,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.tanggal.setText(dateFormatter.format(current.tanggalAgenda));
         holder.slotPemain.setText("10");
 
+        holder.idAgenda = current.id;
         holder.namaPembuat = current.usernamePembuat;
         holder.keterangan = current.keterangan;
         holder.lokasiLapangan = current.lapangan.getLokasi();
@@ -68,7 +69,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         TextView slotPemain;
         TextView tanggal;
         Button checkAgenda;
-        String namaPembuat, keterangan, lokasiLapangan;
+        String idAgenda, namaPembuat, keterangan, lokasiLapangan;
 
         public DashBoardHolder(View itemView, DashboardAdapter adapter) {
             super(itemView);
@@ -86,6 +87,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), CheckAgendaActivity.class);
                     Bundle bundle = new Bundle();
+
+                    bundle.putString("idAgenda",idAgenda);
                     bundle.putString("lapangan",namaLapangan.getText().toString());
                     bundle.putString("slotPemain",slotPemain.getText().toString());
                     bundle.putString("waktuMulai",waktuMulai.getText().toString());

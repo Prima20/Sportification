@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +53,9 @@ public class CreateAgendaActivity extends AppCompatActivity {
     //Fairebase atributes
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private FirebaseAuth mAuth;
+
+    public static String emailUser;
 
     private ArrayList<Lapangan> lapanganList;
     SimpleDateFormat dateFormatter;
@@ -85,10 +89,19 @@ public class CreateAgendaActivity extends AppCompatActivity {
 
         //call method below on onCreate method
         firebaseSetup();
+        setupFirebaseAuth();
+
         setSpinnerLapangan();
         setTimePicker();
-        submitAgenda();
         setDatetime();
+
+        //submit agenda
+        submitAgenda();
+    }
+
+    void setupFirebaseAuth(){
+        mAuth = FirebaseAuth.getInstance();
+        emailUser = mAuth.getCurrentUser().getEmail();
     }
 
     //Get code booking
@@ -158,19 +171,20 @@ public class CreateAgendaActivity extends AppCompatActivity {
     }
 
     //Submit agendaList
-    //Add data from variabel to class, than add to firebase
+    //Add data from variable to class, than add to firebase
     void submitAgenda(){
         final int slot = 10;
 
         submitAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("agenda");
 
                 setData();
 
                 //agendaId become codeBooking
-                Agenda agenda = new Agenda(codeBooking,tanggalAgenda,mulai,selesai,pembuat,keterangan,lapangan,slot,codeBooking);
+                Agenda agenda = new Agenda(codeBooking,tanggalAgenda,mulai,selesai,pembuat,keterangan,lapangan,slot,codeBooking, emailUser);
 
                 mDatabase.child(codeBooking).setValue(agenda);
 
@@ -181,6 +195,14 @@ public class CreateAgendaActivity extends AppCompatActivity {
         });
 
     }
+
+//    boolean checkIfInputNull(){
+//        if(){
+//            return false;
+//        }else {
+//            return true;
+//        }
+//    }
 
     //Add listener to Textview
     void setDatetime(){

@@ -32,7 +32,7 @@
         <activity android:name=".HistoryActivity"
             android:parentActivityName=".DashboardActivity"
             />
-=======
+=======<activity android:name=".DataLapangan" />
         <activity android:name=".DashboardActivity" />
 >>>>>>> 108df96a58903842c1710f5b0fc26f59d4028cc4
 

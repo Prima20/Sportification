@@ -44,8 +44,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
 
-    public static boolean canJoin = true;
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -92,6 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
@@ -116,8 +115,10 @@ public class DashboardActivity extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     Log.d("Database","run");
                     Agenda value = dataSnapshot1.getValue(Agenda.class);
-                    agendaList.add(new Agenda(value.id,value.tanggalAgenda,value.waktuMulai,value.waktuSelesai,value.usernamePembuat,value.keterangan,value.lapangan,
-                            value.jumlahSlot,value.codeBooking));
+                    if(value.usernamePembuat != null){
+                        agendaList.add(new Agenda(value.id,value.tanggalAgenda,value.waktuMulai,value.waktuSelesai,value.usernamePembuat,value.keterangan,value.lapangan,
+                                value.jumlahSlot,value.codeBooking));
+                    }
                 }
 
                 mAdapter = new DashboardAdapter(agendaList,DashboardActivity.this);
@@ -147,8 +148,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.item_history:
-                Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
-                startActivity(intent);
+                seeHistory();
                 break;
             case R.id.item_logout:
                 Toast.makeText(getApplicationContext(),"User logout",Toast.LENGTH_SHORT).show();
