@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,8 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rpl.kelompok7.sportification.DashboardActivity;
 import com.rpl.kelompok7.sportification.DashboardAdapter;
+import com.rpl.kelompok7.sportification.LoginActivity;
 import com.rpl.kelompok7.sportification.Models.*;
 import com.rpl.kelompok7.sportification.R;
+import com.rpl.kelompok7.sportification.RegisterActivity;
 
 
 /**
@@ -39,7 +42,6 @@ public class FirebaseMethods {
 
 
     private static final String TAG = "HomeActivity";
-    private String userID;
     private Context mContext;
 
 
@@ -49,60 +51,43 @@ public class FirebaseMethods {
         myRef = mFirebaseDatabase.getReference();
         mContext = context;
 
-        if(mAuth.getCurrentUser() != null){
-            userID = mAuth.getCurrentUser().getUid();
-        }
     }
 
-
-    public void updateEmail(String email){
-        myRef.child(mContext.getString(R.string.db_users))
-                .child(userID)
-                .child(mContext.getString(R.string.db_field_email))
-                .setValue(email);
-    }
-
-//    public User getUser(final String id){
-//        final User[] user = new User[1];
+    public Task<AuthResult> registerNewEmail(final String email , final String username , final String password ,final String role){
+        return  mAuth.createUserWithEmailAndPassword(email, password);
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 //
-////        Log.d("=======================", user[0].toString());
+//                        if (!task.isSuccessful()) {
+//                            Toast.makeText(mContext, "failed", Toast.LENGTH_SHORT).show();
+//                        } else if(task.isSuccessful()){
+//                            Toast.makeText(mContext, "register success", Toast.LENGTH_SHORT).show();
+//                            addNewUser(email, username,role).addOnCompleteListener(RegisterActivity.this ,new OnCompleteListener<Void>(){
 //
-//        return user[0];
-//    }
-
-
-    public void registerNewEmail(final String email , final String username , final String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(mContext, "failed", Toast.LENGTH_SHORT).show();
-                        } else if(task.isSuccessful()){
-                            userID = mAuth.getCurrentUser().getUid();
-                            Toast.makeText(mContext, "register success", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    Intent intent = new Intent(mContext , LoginActivity.class);
+//                                    startActivity(intent);
+//                                }
+//                            } );
+//                        }
+//                    }
+//                });
     }
 
-    public void addNewUser(String email, String username ,String role){
-
-        Toast.makeText(mContext , role + email + username + userID , Toast.LENGTH_SHORT).show();
+    public Task<Void> addNewUser(String email, String username ,String role ){
         User user = new User(
                 email,
                 role,
-                userID,
+                mAuth.getCurrentUser().getUid(),
                 username
         );
 
-        myRef.child(mContext.getString(R.string.db_users))
-                .child(userID)
+        return myRef.child(mContext.getString(R.string.db_users))
+                .child(mAuth.getCurrentUser().getUid())
                 .setValue(user);
-
     }
-
 
 }

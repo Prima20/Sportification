@@ -39,10 +39,10 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private EditText mEmail , mPassword;
     private Button buttonLogin;
-    private FirebaseMethods firebaseMethods;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("=======================","create login activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
 
-        firebaseMethods = new FirebaseMethods(mContext);
 
         setupFirebaseAuth();
         register();
@@ -141,16 +140,48 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        if(mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(mContext , DashboardActivity.class);
-            startActivity(intent);
-            finish();
+
+        if(mAuth.getCurrentUser() != null) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mengambilDataProfilUserDariFirebase();
         }
+
     }
 
     void toDashboard(){
         Intent intent = new Intent(mContext , DashboardActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    void mengambilDataProfilUserDariFirebase(){
+        Log.d("=======================","mengambil data profil user dari firebase");
+        myRef.child(mContext.getString(R.string.db_users)).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("=======================","data didapatkan");
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    User tmp =  dataSnapshot1.getValue(User.class);
+                    if(tmp.user_id != null) {
+                        Log.d("=======================","current user id " + mAuth.getCurrentUser().getUid());
+                        Log.d("=======================","snapshot user id " + tmp.user_id);
+                        if (tmp.user_id.equals(mAuth.getUid()) && tmp.role != null) {
+                            Log.d("user is not null ", "found match " + tmp.role);
+                            if (tmp.role.equals("Pemain Futsal")) {
+                                toDashboard();
+                            } else if (tmp.role.equals("Pemilik Lapangan")) {
+                                Intent intent = new Intent(mContext, CheckCodeActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Test", "Failed to read value.", databaseError.toException());
+            }
+        });
     }
 
     /*
