@@ -49,6 +49,19 @@ public class Agenda {
         this.emailPemain.add(emailPemain);
     }
 
+    public Agenda(String id, Date tanggalAgenda, String waktuMulai, String waktuSelesai, String usernamePembuat, String keterangan, Lapangan lapangan, int jumlahSlot, String codeBooking, ArrayList emailPemain) {
+        this.id = id;
+        this.waktuMulai = waktuMulai;
+        this.waktuSelesai = waktuSelesai;
+        this.usernamePembuat = usernamePembuat;
+        this.keterangan = keterangan;
+        this.lapangan = lapangan;
+        this.jumlahSlot = jumlahSlot;
+        this.codeBooking = codeBooking;
+        this.tanggalAgenda = tanggalAgenda;
+        this.emailPemain = emailPemain;
+    }
+
 
 
     public Agenda(Date tanggalAgenda) {

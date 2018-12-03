@@ -52,16 +52,6 @@ public class HistoryActivity extends AppCompatActivity {
 
         getDataUserHistory();
 
-
-
-//        mAdapter = new HistoryAdapter(historyList,HistoryActivity.this);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
-//        recyclerView.setAdapter(mAdapter);
-
-//        for(Agenda s : agendaList) {
-//            historyList.add(s);
-//            mAdapter.notifyDataSetChanged();
-//        }
     }
 
     void setupFirebase(){
@@ -73,23 +63,36 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     void getDataUserHistory(){
-        Query queryRef = mReference.child("codeBooking").orderByChild("emailPemain").equalTo(0);
-        queryRef.addValueEventListener(new ValueEventListener() {
+
+        //get data from firebase
+        mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    Log.d("History:","Run snapshot");
                     Agenda value = dataSnapshot1.getValue(Agenda.class);
-                    historyList.add(new Agenda(value.tanggalAgenda));
+
+                    for(int i=0; i<value.emailPemain.size(); i++){
+                        Log.d("Email:",value.emailPemain.get(i) +" == "+emailUser);
+
+                        if(emailUser.equalsIgnoreCase(value.emailPemain.get(i))){
+                            Log.d("Email:","ada");
+                            //Add agenda to ArrayList
+                            historyList.add(new Agenda(value.tanggalAgenda));
+                        }
+                    }
 
                 }
 
-                mAdapter = new HistoryAdapter(historyList,HistoryActivity.this);
+                //Display list agenda
+                mAdapter = new HistoryAdapter(historyList, HistoryActivity.this);
                 recyclerView.setLayoutManager(new LinearLayoutManager(HistoryActivity.this));
                 recyclerView.setAdapter(mAdapter);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

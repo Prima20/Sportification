@@ -124,6 +124,7 @@ public class CreateAgendaActivity extends AppCompatActivity {
                     Lapangan value = dataSnapshot1.getValue(Lapangan.class);
                     lapanganList.add(new Lapangan(value.getLapangan(), value.getLokasi()));
                 }
+
                 ArrayAdapter<Lapangan> adapter  = new
                         ArrayAdapter<Lapangan>(getApplicationContext(), R.layout.spinner_item, lapanganList);
 
@@ -184,7 +185,7 @@ public class CreateAgendaActivity extends AppCompatActivity {
                 setData();
 
                 //agendaId become codeBooking
-                Agenda agenda = new Agenda(codeBooking,tanggalAgenda,mulai,selesai,pembuat,keterangan,lapangan,slot,codeBooking, emailUser);
+                Agenda agenda = new Agenda(codeBooking, tanggalAgenda, mulai, selesai, pembuat, keterangan, lapangan, slot, codeBooking, emailUser);
 
                 mDatabase.child(codeBooking).setValue(agenda);
 
@@ -196,13 +197,7 @@ public class CreateAgendaActivity extends AppCompatActivity {
 
     }
 
-//    boolean checkIfInputNull(){
-//        if(){
-//            return false;
-//        }else {
-//            return true;
-//        }
-//    }
+
 
     //Add listener to Textview
     void setDatetime(){

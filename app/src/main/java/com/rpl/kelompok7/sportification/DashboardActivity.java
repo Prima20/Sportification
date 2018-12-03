@@ -35,7 +35,6 @@ public class DashboardActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private  DashboardAdapter mAdapter;
     ArrayList<Agenda> agendaList;
-    private Button createAgenda;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -74,7 +73,6 @@ public class DashboardActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
 
-        createAgenda = findViewById(R.id.btn_create_agenda);
         recyclerView = findViewById(R.id.recycler_view);
 
 
@@ -132,21 +130,16 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-
-        //Create agenda on CreateAgendaActivity
-        createAgenda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CheckCodeActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     void displayView(int id){
 
         switch (id){
+            //Move to checkCodeActivity to create agenda
+            case R.id.item_create_agenda:
+                Intent intent = new Intent(getApplicationContext(), CheckCodeActivity.class);
+                startActivity(intent);
+                break;
             case R.id.item_history:
                 seeHistory();
                 break;

@@ -46,13 +46,12 @@ public class CheckCodeActivity extends AppCompatActivity {
     }
 
     void checkCode(){
+
         checkCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-//                if (checkInput()) {
-//                    Toast.makeText(view.getContext(), "Input salah", Toast.LENGTH_SHORT).show();
-//                } else {
 
+                //Check code from firebase database
                 mReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -70,18 +69,10 @@ public class CheckCodeActivity extends AppCompatActivity {
 
                     }
                     });
-                //}
-            }
+                }
+
         });
 
-    }
-
-    boolean checkInput(){
-        if(code.getText().toString().equals(null)){
-           return false;
-        }else {
-            return true;
-        }
     }
 
     void firebaseSetup(){

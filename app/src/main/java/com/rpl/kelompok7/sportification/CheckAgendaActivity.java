@@ -38,7 +38,8 @@ public class CheckAgendaActivity extends AppCompatActivity {
 
     String idAgenda, userEmail;
 
-    HistoryActivity history;
+    Agenda agenda;
+
     Date tanggalAgenda;
     SimpleDateFormat dateFormatter;
 
@@ -53,7 +54,6 @@ public class CheckAgendaActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
 
-        history = new HistoryActivity();
 
         pemesan = findViewById(R.id.tv_pemesan);
         lapangan = findViewById(R.id.tv_lapangan);
@@ -64,11 +64,11 @@ public class CheckAgendaActivity extends AppCompatActivity {
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-        pemesan.setText("Pembuat:" + getIntent().getExtras().getString("pembuat"));
+        pemesan.setText("Pembuat: " + getIntent().getExtras().getString("pembuat"));
 
         lapangan.setText(getIntent().getExtras().getString("lapangan"));
 
-        waktu.setText(getIntent().getExtras().getString("waktuMulai") + ":" +
+        waktu.setText(getIntent().getExtras().getString("waktuMulai") + " - " +
                 getIntent().getExtras().getString("waktuSelesai"));
 
         slot.setText(getIntent().getExtras().getString("slotPemain"));
@@ -83,13 +83,23 @@ public class CheckAgendaActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
         }
 
-        SetupFirebase();
+
 
         idAgenda = getIntent().getExtras().getString("idAgenda");
 
         joinAgenda = findViewById(R.id.btn_join_agenda);
 
-        joinAgenda();
+        SetupFirebase();
+
+        joinAgenda(new DataCallback() {
+            @Override
+            public void onCallback(Agenda value) {
+
+                //Update email user
+                value.updateUserEmail(userEmail);
+                mReference.child(idAgenda).setValue(value);
+            }
+        });
 
     }
 
@@ -101,48 +111,48 @@ public class CheckAgendaActivity extends AppCompatActivity {
         userEmail = mAuth.getCurrentUser().getEmail();
     }
 
-    void joinAgenda(){
+    void joinAgenda(final DataCallback dataCallback){
         joinAgenda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 Log.d("id agenda", idAgenda);
 
-                final DatabaseReference mDbref = FirebaseDatabase.getInstance().getReference("agenda");
 
-                mReference.addValueEventListener(new ValueEventListener() {
+                mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        Agenda agenda = null;
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+
                             Agenda value = dataSnapshot1.getValue(Agenda.class);
 
                             Log.d("Check", value.id + " && " + idAgenda);
+
                             if(idAgenda.equalsIgnoreCase(value.id)){
+
                                 Log.d("Lapangan","Id tersedia");
 
-                                //Get agenda you want to update
-                                agenda = value;
+                                //Get agenda you want to update put on interface
+
+                                dataCallback.onCallback(value);
 
                                 }
                             }
 
-                            //Add email
-                            agenda.updateUserEmail(userEmail);
-
-                            //Update email to database
-                            mDbref.child(idAgenda).setValue(agenda);
-                            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
-                            startActivity(intent);
-
                         Log.d("Lapangan","looping selesai");
                     }
+
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
+
                 });
+
+                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                startActivity(intent);
             }
         });
     }

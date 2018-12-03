@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/item_create_agenda"
+        android:title="Create agenda"
+        />
+    <item
         android:id="@+id/item_history"
         android:title="History"
         />
