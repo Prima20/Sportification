@@ -2,7 +2,6 @@ package com.rpl.kelompok7.sportification;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.rpl.kelompok7.sportification.Models.Agenda;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -95,9 +93,29 @@ public class CheckAgendaActivity extends AppCompatActivity {
             @Override
             public void onCallback(Agenda value) {
 
+                boolean hasJoined = false;
+
                 //Update email user
-                value.updateUserEmail(userEmail);
-                mReference.child(idAgenda).setValue(value);
+                //if Agenda is full
+                if(value.emailPemain.size() == 10){
+                    Toast.makeText(getApplicationContext(),"Agenda sudah penuh",Toast.LENGTH_SHORT).show();
+                }else{
+                    for(int i=0; i<value.emailPemain.size(); i++){
+                        //if user already join
+                        if(userEmail.equalsIgnoreCase(value.emailPemain.get(i))) {
+                            hasJoined = true;
+                        }
+                    }
+                    if(hasJoined){
+                        Toast.makeText(getApplicationContext(), "Pemain sudah join",Toast.LENGTH_SHORT).show();
+                    }else{
+                        //Register user to agenda
+                        value.updateUserEmail(userEmail);
+                        mReference.child(idAgenda).setValue(value);
+                        Toast.makeText(getApplicationContext(), "Agenda joined !",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
