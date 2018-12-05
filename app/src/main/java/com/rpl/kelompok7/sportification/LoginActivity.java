@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (tmp.role.equals("Pemain Futsal")) {
                                 toDashboard();
                             } else if (tmp.role.equals("Pemilik Lapangan")) {
-                                Intent intent = new Intent(mContext, CheckCodeActivity.class);
+                                Intent intent = new Intent(mContext, DataLapangan.class);
                                 startActivity(intent);
                             }
                         }

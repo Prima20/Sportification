@@ -25,7 +25,7 @@ public class DataLapangan extends AppCompatActivity {
 
     private EditText namaLapangan, alamat, ket;
     private TextView generateCode, jamMulai, jamSelesai;
-    private Button submitLapangan;
+    private Button submitLapangan , logoutPemilik;
     private String namaLap, address;
     private DatabaseReference mDatabase;
     private int kode;
@@ -62,6 +62,16 @@ public class DataLapangan extends AppCompatActivity {
         alamat = findViewById(R.id.edt_alamat);
         generateCode = findViewById(R.id.tv_generateCode);
         submitLapangan = findViewById(R.id.btn_submitLapangan);
+        logoutPemilik = findViewById(R.id.btn_logout_pemilik_lapangan);
+
+        logoutPemilik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+                Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         jamMulai = findViewById(R.id.waktu_mulai);
         jamSelesai = findViewById(R.id.waktu_selesai);
@@ -138,9 +148,18 @@ public class DataLapangan extends AppCompatActivity {
 //                String agendaId = String.valueOf(number);
 //                dr.child(agendaId).setValue(agenda);
 
-                logout();
-                Intent intent = new Intent(view.getContext(), LoginActivity.class);
-                startActivity(intent);
+                namaLapangan.setText("");
+                alamat.setText("");
+
+
+                namaLap = null;
+                address = null;
+
+                generateCode.setText("");
+
+//                logout();
+//                Intent intent = new Intent(view.getContext(), LoginActivity.class);
+//                startActivity(intent);
             }
         });
     }

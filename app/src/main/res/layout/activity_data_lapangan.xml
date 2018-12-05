@@ -86,6 +86,16 @@
             android:background="@drawable/white_rounded_button"
             android:text="SUBMIT" />
 
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_logout_pemilik_lapangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/white_rounded_button"
+            android:text="LOGOUT" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
